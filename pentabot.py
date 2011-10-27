@@ -51,21 +51,6 @@ class pentaBot(JabberBot):
         result = pywapi.get_weather_from_google(weather=dresden,germany)
         return "Google says: It is " + string.lower(result['current_conditions']['condition']) + " and " + result['current_conditions']['temp_c'] + "C now Dresden.\n\n"
     
-    @botcmd
-    def check_group( self, mess, args):
-        """
-        Gibt Gruppenzugehoerigkeit als Bool
-        Usage: check_group jid group
-        """
-        args = args.strip().split(' ')
-        in_group = "0"
-        jid = args[0]
-        groups = self.conn.Roster.getGroups(jid)
-        if args[1] in groups:
-            in_group = "1"
-        else:
-            pass
-        return "%s" % in_group
 
     @botcmd
     def fortune(self, mess, args):
