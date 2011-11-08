@@ -42,6 +42,17 @@ class pentaBot(JabberBot):
     For more info: http://github.com/koeart/pentabot
     koeart <at remove this> zwoelfelf <this as well> <net>
     """
+
+    @botcmd
+    def fridge(self, mess, args):
+        """
+        Zeige den Inhalt des Kühlschranks
+        """
+        import fridge
+        fridge.load()
+        for product in fridge.fridge.keys():
+            result += "" + str(fridge.fridge[product]) + " " product + "\n"
+        return result
     
     @botcmd
     def weather( self, mess, args):
