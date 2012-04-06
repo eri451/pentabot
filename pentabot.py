@@ -49,9 +49,9 @@ class pentaBot(JabberBot):
         Zeige den Inhalt des Kühlschranks
         """
         import fridge
-        fridge.load()
+        fridge.load(fridge.json)
         for product in fridge.fridge.keys():
-            result += "" + str(fridge.fridge[product]) + " " product + "\n"
+            result += "" + str(fridge.fridge[product]) + " " + product + "\n"
         return result
     
     @botcmd
@@ -59,7 +59,7 @@ class pentaBot(JabberBot):
         """
         Gibt den Wetterbericht für DD zurück
         """
-        result = pywapi.get_weather_from_google(weather=dresden,germany)
+        result = pywapi.get_weather_from_google(dresden,germany)
         return "Google says: It is " + string.lower(result['current_conditions']['condition']) + " and " + result['current_conditions']['temp_c'] + "C now Dresden.\n\n"
     
 
@@ -202,7 +202,7 @@ class pentaBot(JabberBot):
                     existing = ab.keys()
                     existing.sort()
                     group += "Die bisher existierenden Gruppen sind: %s" % ", ".join(existing)
-                else:
+               else:
                     if groups:
                         list_group = ", ".join(groups)
                         if not list_group:
@@ -211,7 +211,7 @@ class pentaBot(JabberBot):
                             group += "%s ist in de{n,r} Gruppe(n) %s " % (args[1], list_group)
                     else:
                         group += "Bitte rufe 'help group' fuer moegliche Optionen auf!"
-           else:
+            else:
                 group += "Befehl '%s' nicht gefunden!\n" % args[0]
                 group += "Bitte rufe 'help group' fuer moegliche Optionen auf!"
         return group
