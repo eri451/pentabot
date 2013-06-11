@@ -51,7 +51,7 @@ class pentaBot(JabberBot):
         import fridge
         fridgestore = fridge.store()
         result = ""
-        for name in fridgestore.Content.key():
+        for name in fridgestore.Content.keys():
             # Achtung gefaerlich bei einer Menge Daten (RAM overflow)
             result += name + ": " + str(fridgestore.Content[name]) + "\n"
         return result
