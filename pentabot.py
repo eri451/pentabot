@@ -125,7 +125,7 @@ class pentaBot(JabberBot):
         else:
             if mess.getFrom().getStripped() in self.conn.Roster.getItems():
                 if self._list_group(mess.getFrom().getStripped()):
-                    roster = "Hallo %s, du bist in %s" % mess.getFrom().getStripped(), self._list_group(mess.getFrom().getStripped())
+                    roster = "Hallo %s, du bist in %s" % ( mess.getFrom().getStripped(), self._list_group( mess.getFrom().getStripped() ) )
                 else:
                     roster = "Hallo %s, du bist noch in keiner Gruppe" % mess.getFrom().getStripped()
             else:
