@@ -32,7 +32,7 @@ feed_help= {}
 feed_help['lastrss']= "\n".join(dict(config.items('RSS')).keys())
 
 def format_help(fun):
-    fun.__doc__ = fun.__doc__.format(**feed_help) #** dict entpacken, * listen entpacken 
+    fun.__doc__ = fun.__doc__.format(**feed_help) #** dict entpacken, * listen entpacken
     return fun
 
 
@@ -44,16 +44,18 @@ class pentaBot(JabberBot):
     """
 
     @botcmd
-    def fridge(self, mess, args):
+    def fridge(self):
         """
         Zeige den Inhalt des Kühlschranks
         """
         import fridge
-        fridge.load()
-        for product in fridge.fridge.keys():
-            result += "" + str(fridge.fridge[product]) + " " product + "\n"
+        fridgestore = fridge.store()
+        result = ""
+        for name in fridgestore.Content.key():
+            # Achtung gefaerlich bei einer Menge Daten (RAM overflow)
+            result += name + ": " + str(fridgestore.Content[name]) + "\n"
         return result
-    
+
     @botcmd
     def weather( self, mess, args):
         """
@@ -61,7 +63,7 @@ class pentaBot(JabberBot):
         """
         result = pywapi.get_weather_from_google(weather=dresden,germany)
         return "Google says: It is " + string.lower(result['current_conditions']['condition']) + " and " + result['current_conditions']['temp_c'] + "C now Dresden.\n\n"
-    
+
 
     @botcmd
     def fortune(self, mess, args):
@@ -123,7 +125,7 @@ class pentaBot(JabberBot):
         else:
             if mess.getFrom().getStripped() in self.conn.Roster.getItems():
                 if self._list_group(mess.getFrom().getStripped()):
-                    roster = "Hallo %s, du bist in" % mess.getFrom().getStripped(), self._list_group(mess.getFrom().getStripped())
+                    roster = "Hallo %s, du bist in %s" % mess.getFrom().getStripped(), self._list_group(mess.getFrom().getStripped())
                 else:
                     roster = "Hallo %s, du bist noch in keiner Gruppe" % mess.getFrom().getStripped()
             else:
