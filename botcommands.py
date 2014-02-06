@@ -68,16 +68,6 @@ def gentopic(self,mess,args):
     """
     return 'Wie wärs mit „%s“'%get_topic()
 
-@botcmd
-@ignore_msg_from_self
-def kickrnd(self,mess,args):
-	"""
-	Schmeißt eine zufällig gewählte Person raus
-	"""
-	rnduser = mess.getFrom()
-	self.muc_kick(mess.getTo(),rnduser,get_kickreason())
-	return ":-)"
-
 
 @botcmd
 @ignore_msg_from_self
@@ -99,15 +89,201 @@ def whoami(self, mess, args):
     else:
         return mess.getFrom().getStripped()
 
+
+
+
 @botcmd
 @ignore_msg_from_self
 def serverinfo(self, mess, args):
     """
     Zeige Informationen ueber den Server
     """
-    version = " ".join(map(str, open('/proc/version').read().split(" ")[0:3]))
-    loadavg = open('/proc/loadavg').read().strip()
-    return '%s\nload:\n%s' % ( version, loadavg, )
+    serverinfo = ''
+    try:
+        serverinfo += os.popen('/usr/bin/uname -m -r -s -o').read()
+        serverinfo += os.popen('/usr/bin/uptime').read()
+        serverinfo += os.popen('/usr/bin/top | /usr/bin/grep "Mem"').read()
+    except:
+        serverinfo += 'Sorry Dude'
+    return ('Info:\n' + serverinfo)
+
+@botcmd
+@ignore_msg_from_self
+def ping6cider(self, mess, args):
+    """
+    Zeige Informationen ueber den Server - cider.hq.c3d2.de
+    """
+    ping6cider = ''
+    try:
+        ping6cider += os.popen('/sbin/ping6 -c4 cider.hq.c3d2.de  | /usr/bin/tail -2').read()
+    except:
+        ping6cider += 'Sorry Dude'
+    return ('Info:\n' + ping6cider)
+
+@botcmd
+@ignore_msg_from_self
+def ping6flatbert(self, mess, args):
+    """
+    Zeige Informationen ueber den Server - flatbert.hq.c3d2.de
+    """
+    ping6flatbert = ''  
+    try:
+        ping6flatbert += os.popen('/sbin/ping6 -c4 flatbert.hq.c3d2.de  | /usr/bin/tail -2').read()
+    except:
+        ping6flatbert += 'Sorry Dude'
+    return ('Info:\n' + ping6flatbert)
+
+@botcmd
+@ignore_msg_from_self
+def ping6beere(self, mess, args):
+    """
+    Zeige Informationen ueber den Server - beere.hq.c3d2.de
+    """
+    ping6beere = ''
+    try:
+        ping6beere += os.popen('/sbin/ping6 -c4 beere.hq.c3d2.de  | /usr/bin/tail -2').read()
+    except:
+        ping6beere += 'Sorry Dude'
+    return ('Info:\n' + ping6beere)
+
+@botcmd
+@ignore_msg_from_self
+def ping6ledbeere(self, mess, args):
+    """
+    Zeige Informationen ueber den Server - ledbeere.hq.c3d2.de
+    """
+    ping6ledbeere = ''
+    try:
+        ping6ledbeere += os.popen('/sbin/ping6 -c4 ledbeere.hq.c3d2.de  | /usr/bin/tail -2').read()
+    except:
+        ping6ledbeere += 'Sorry Dude'
+    return ('Info:\n' + ping6ledbeere)
+
+@botcmd
+@ignore_msg_from_self
+def ping6chaosbay(self, mess, args):
+    """
+    Zeige Informationen ueber den Server - chaosbay.hq.c3d2.de
+    """
+    ping6chaosbay = ''
+    try:
+        ping6chaosbay += os.popen('/sbin/ping6 -c4 chaosbay.hq.c3d2.de  | /usr/bin/tail -2').read()
+    except:
+        ping6chaosbay += 'Sorry Dude'
+    return ('Info:\n' + ping6chaosbay)
+
+@botcmd
+@ignore_msg_from_self
+def ping6knot(self, mess, args):
+    """
+    Zeige Informationen ueber den Server - knot.hq.c3d2.de
+    """
+    ping6knot = ''
+    try:
+        ping6knot += os.popen('/sbin/ping6 -c4 knot.hq.c3d2.de  | /usr/bin/tail -2').read()
+    except:
+        ping6knot += 'Sorry Dude'
+    return ('Info:\n' + ping6knot)
+
+@botcmd
+@ignore_msg_from_self
+def hq_daniel(self, mess, args):
+    """
+    User availability
+    """
+    hq_daniel = ''
+    try:
+        hq_daniel += os.popen('/pentabot/shell/hq-check-daniel.sh').read()
+    except:
+        hq_daniel += 'Sorry Dude'
+    return ('Info:\n' + hq_daniel)
+
+@botcmd
+@ignore_msg_from_self
+def hq_vater(self, mess, args):
+    """
+    User availability
+    """
+    hq_vater = ''
+    try:
+        hq_vater += os.popen('/pentabot/shell/hq-check-vater.sh').read()
+    except:
+        hq_vater += 'Sorry Dude'
+    return ('Info:\n' + hq_vater)
+
+@botcmd
+@ignore_msg_from_self
+def randompassword(self, mess, args):
+    """
+    Ein Passwoertchen fuer die Welt
+    """
+    randompassword = ''
+    try:
+        randompassword += os.popen('/usr/bin/openssl rand -base64 20 | /usr/bin/cut -c1-20').read()
+    except:
+        randompassword += 'Sorry Dude'
+    return ('Ein Passwoertchen fuer die Welt: mit OpenSSL Random Password Generator:\n' + randompassword)
+
+@botcmd
+@ignore_msg_from_self
+def zufall100(self, mess, args):
+    """
+    Zufall in 100
+    """
+    zufall100 = ''
+    try:
+        zufall100 += os.popen('/pentabot/shell/zufall_100.sh').read()
+    except:
+        zufall100 += 'Sorry Dude'
+    return ('Zufall 1-100 sagt:\n' + zufall100)
+
+@botcmd
+@ignore_msg_from_self
+def gedichte(self, mess, args):
+    """
+    gedichte Cookie for you
+
+    A Cookie you can trust and accept.
+    Just run gedichte
+    """
+    gedichte = ''
+    try:
+        gedichte += os.popen('/basejail/usr/games/fortune /usr/share/games/fortune/gedichte').read()
+    except:
+        gedichte += 'Your gedichte unforseeable'
+    return ('Your Cookie reads:\n' + gedichte)
+
+@botcmd
+@ignore_msg_from_self
+def weihnachtsgedichte(self, mess, args):
+    """
+    weihnachtsgedichte Cookie for you
+
+    A Cookie you can trust and accept.
+    Just run weihnachtsgedichte
+    """
+    weihnachtsgedichte = ''
+    try:
+        weihnachtsgedichte += os.popen('/basejail/usr/games/fortune /usr/share/games/fortune/weihnachtsgedichte').read()
+    except:
+        weihnachtsgedichte += 'Your weihnachtsgedichte unforseeable'
+    return ('Your Cookie reads:\n' + weihnachtsgedichte)
+
+@botcmd
+@ignore_msg_from_self
+def weihnachtsmukke(self, mess, args):
+    """
+    Weihnachten in da House
+    """
+    return 'http://www.youtube.com/watch?v=F4kFVhew35g'
+
+@botcmd
+@ignore_msg_from_self
+def mahlzeit(self, mess, args):
+    """
+    Cityherberge Dresden - Speisekarte
+    """
+    return 'http://www.cityherberge.de/wp-content/uploads/speiseplan/speisenkarte.pdf'
 
 @botcmd
 @ignore_msg_from_self
@@ -120,10 +296,45 @@ def fortune(self, mess, args):
     """
     fortune = ''
     try:
-        fortune += os.popen('/usr/games/fortune').read()
+        fortune += os.popen('/basejail/usr/games/fortune /usr/share/games/fortune/000').read()
     except:
         fortune += 'Your fortune unforseeable'
     return ('Your Cookie reads:\n' + fortune)
+
+@botcmd
+@ignore_msg_from_self
+def cowgedichte(self, mess, args):
+    """
+    cowGedichte Cookie for you
+    
+    A Cookie you can trust and accept.
+    Just run cowgedichte
+    """
+    cowgedichte = ''
+    try:
+        cowgedichte += os.popen('/basejail/usr/games/fortune /usr/share/games/fortune/gedichte | /usr/local/bin/cowsay').read()
+    except:
+        cowgedichte += 'Your cowgedichte unforseeable'
+    return ('Your Cookie reads:\n' + cowgedichte)
+
+@botcmd
+@ignore_msg_from_self
+def cowfortune(self, mess, args):
+    """
+    cowFortune Cookie for you
+
+    A Cookie you can trust and accept.
+    Just run cowfortune
+    """
+    cowfortune = ''
+    try:
+        cowfortune += os.popen('/basejail/usr/games/fortune /usr/share/games/fortune/000 | /usr/local/bin/cowsay').read()
+    except:
+        cowfortune += 'Your cowfortune unforseeable'
+    return ('Your Cookie reads:\n' + cowfortune)
+
+
+
 
 @botcmd
 @ignore_msg_from_self
@@ -134,9 +345,9 @@ def ddate(self, mess, args):
     args = args.strip().split(' ')
     ddate = ''
     if len(args) <= 1 :
-        ddate += os.popen('/usr/bin/ddate').read()
+        ddate += os.popen('/usr/local/bin/ddate').read()
     elif len(args) == 3 and all(arg.isdigit() for arg in args):
-        ddate += os.popen('/usr/bin/ddate ' + args[0] + ' ' + args[1] + ' ' + args[2]).read()
+        ddate += os.popen('/usr/local/bin/ddate ' + args[0] + ' ' + args[1] + ' ' + args[2]).read()
     else:
         ddate = 'You are not using correctly!\n Just enter ddate or append day month year'
     return ddate
@@ -162,6 +373,56 @@ def last(self, mess, args):
             message += 'Titel: ' + f.get('title') + '\n' + 'URL: ' + f.get('link') + '\n'
     else:
         message = 'Bitte rufe \"help last\" fuer moegliche Optionen auf!'
+    return message
+
+@format_help  
+@botcmd
+@ignore_msg_from_self
+def mensa(self, mess, args):
+    """
+    Gibt die aktuellen Leckereien wieder
+    Moegliche Eingaben:
+    {lastrssmensa}
+    """
+    args = args.strip().split(' ')
+    if args[0] in dict(config.items('RSSMENSA')).keys():
+        message = "\n"
+        if len(args) == 1:
+            args.append('1')
+        if int(args[1]) > int(config.get('RSSMENSA', "maxfeedsmensa")):
+            args[1] = config.get('RSSMENSA', "maxfeedsmensa")
+        for loop in range(int(args[1])):
+            f = feedparser.parse(config.get('RSSMENSA', args[0])).get('entries')[loop]
+            message += 'Titel: ' + f.get('title') + '\n' + 'URL: ' + f.get('link') + '\n'
+            f = feedparser.parse(config.get('RSSMENSA', args[0])).get('entries')[1]
+            message += 'Titel: ' + f.get('title') + '\n' + 'URL: ' + f.get('link') + '\n'
+            f = feedparser.parse(config.get('RSSMENSA', args[0])).get('entries')[2]
+            message += 'Titel: ' + f.get('title') + '\n' + 'URL: ' + f.get('link') + '\n'
+    else:
+        message = 'Bitte rufe \"help mensa\" fuer moegliche Optionen auf!'
+    return message
+
+@format_help
+@botcmd
+@ignore_msg_from_self
+def github(self, mess, args):
+    """
+    Gibt die aktuellen GitHub Aktivitäten wieder
+    Moegliche Eingaben:
+    {lastrssgithub}
+    """
+    args = args.strip().split(' ')
+    if args[0] in dict(config.items('RSSGITHUB')).keys():
+        message = "\n"
+        if len(args) == 1:
+            args.append('1')
+        if int(args[1]) > int(config.get('RSSGITHUB', "maxfeedsgithub")):
+            args[1] = config.get('RSSGITHUB', "maxfeedsgithub")
+        for loop in range(int(args[1])):
+            f = feedparser.parse(config.get('RSSGITHUB', args[0])).get('entries')[loop]
+            message += 'Titel: ' + f.get('title') + '\n' + f.get('updated') + '\n' + 'URL: ' + f.get('link') + '\n'
+    else:
+        message = 'Bitte rufe \"help github\" fuer moegliche Optionen auf!'
     return message
 
 @botcmd
@@ -244,7 +505,6 @@ def abfahrt(self, mess, args):
                         abfahrt += "und viele mehr..."
                         break
 
-
     return abfahrt
 
 @botcmd
@@ -287,6 +547,7 @@ def hq(self, mess, args):
         message = help_msg
     elif args[0] == "status":
         message += content.get("state").get("message")
+        message += "   " + "UTC/GMT+1" + "   "  + str(datetime.datetime.now())
     elif args[0] == "coords":
         message += "Das HQ findest du auf %s ."%(_stroflatlog_de(content.get("location").get("lat") , content.get("location").get("lon")))
     elif args[0] == "web":
@@ -337,3 +598,113 @@ def hq(self, mess, args):
     else:
         message += "Probier es noch mal mit einer der folgenden Optionen: status, sensors, coords, contact, web oder feeds."
     return message
+
+### ### ### PLITC ### ### ###
+
+@botcmd
+@ignore_msg_from_self
+def serverprozesse(self, mess, args):
+    """
+    Zeige Informationen ueber den Server
+    """
+    serverprozesse = ''
+    try:
+        serverprozesse += os.popen('/bin/ps -xuvwc').read()
+    except:
+        serverprozesse += 'Sorry Dude'
+    return ('Info:\n' + serverprozesse)
+
+@botcmd
+@ignore_msg_from_self
+def serverlastlogin(self, mess, args):
+    """
+    Zeige Informationen ueber den Server
+    """
+    serverlastlogin = ''
+    try:
+        serverlastlogin += os.popen("/usr/bin/last -n 3 | /usr/bin/awk '{print $1,$2,$4,$5,$6,$7,$8,$9,$10}'").read()
+    except:
+        serverlastlogin += 'Sorry Dude'
+    return ('Info:\n' + serverlastlogin)
+
+@botcmd
+@ignore_msg_from_self
+def serversshauth(self, mess, args):
+    """
+    Zeige Informationen ueber den Server
+    """
+    serversshauth = ''
+    try:
+        serversshauth += os.popen('/usr/bin/grep "error" /var/log/auth.log').read()
+    except:
+        serversshauth += 'Sorry Dude'
+    return ('Info:\n' + serversshauth)
+
+@botcmd
+@ignore_msg_from_self
+def servernetstat(self, mess, args):
+    """
+    Zeige Informationen ueber den Server
+    """
+    servernetstat = ''
+    try:
+        servernetstat += os.popen("netstat -f inet6 | /usr/bin/awk '{print $1,$2,$3,$4,$6}'").read()
+    except:
+        servernetstat += 'Sorry Dude'
+    return ('Info:\n' + servernetstat)
+
+@botcmd
+@ignore_msg_from_self
+def serversockstat(self, mess, args):
+    """
+    Zeige Informationen ueber den Server
+    """
+    serversockstat = ''
+    try:
+        serversockstat += os.popen("sockstat -6 | /usr/bin/awk '{print $1,$2,$5}'").read()
+    except:
+        serversockstat += 'Sorry Dude'
+    return ('Info:\n' + serversockstat)
+
+@botcmd
+@ignore_msg_from_self
+def serverportsupdates(self, mess, args):
+    """
+    Zeige Informationen ueber den Server
+    """
+    serverportsupdates = ''
+    try:
+        serverportsupdates += os.popen('/usr/sbin/pkg_version -l "<"').read()
+    except:
+        serverportsupdates += 'Sorry Dude'
+    return ('Info:\n' + serverportsupdates)
+
+@botcmd
+@ignore_msg_from_self
+def serverportsupgrade(self, mess, args):
+    """
+    Server - Ports Upgrade! ... take a deep breath ...
+    """
+    serverportsupgrade = ''
+    try:
+        serverportsupgrade += os.popen('/pentabot/shell/jail_update.csh > /pentabot/shell/jail_update.log 2>&1').read()
+        serverportsupgrade += os.popen('/bin/cat /pentabot/shell/jail_update.log').read()
+    except:
+        serverportsupgrade += 'Sorry Dude'
+    return ('Info:\n' + serverportsupgrade)
+
+@botcmd
+@ignore_msg_from_self
+def lebst_du(self, mess, args):  
+    """
+    :D
+    """
+    lebst_du = ''
+    try:
+        lebst_du += os.popen('echo "Ja, Schöpfer"').read()
+    except:
+        lebst_du += 'Sorry Dude'
+    return ('Info:\n' + lebst_du)
+
+### ### ### PLITC ### ### ###
+# EOF
